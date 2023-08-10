@@ -1,0 +1,80 @@
+﻿<Window x:Class="BookList.View.AddBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:converters="clr-namespace:BookList.Converters"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookList.View" xmlns:viewmodel="clr-namespace:BookList.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddBookWindowViewModel}"
+        mc:Ignorable="d"
+        Title="AddBookWindow" Height="450" Width="300">
+
+    <Window.Resources>
+        <converters:Bool2VisibilityConverter x:Key="Bool2VisibilityConverter"/>
+        <converters:Bool2MarginConverter x:Key="Bool2MarginConverter"/>
+    </Window.Resources>
+    
+    <Grid>
+        <StackPanel HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <StackPanel HorizontalAlignment="Left">
+                <Label Content="Tytuł:" />
+                <TextBox FontSize="16" 
+                         Margin="5" 
+                         Height="30" 
+                         Width="150" 
+                         Text="{Binding BookTitle, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left">
+                <Label Content="Ocena:"/>
+                <TextBox FontSize="16" 
+                             Margin="5 0 0 5" 
+                             Height="30" 
+                             Width="150" 
+                             Text="{Binding BookRating, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left">
+                <Label Content="Data Publikacji:"/>
+                <TextBox FontSize="16" 
+                         Margin="5 0 0 5" 
+                         Height="30" 
+                         Width="150" 
+                         Text="{Binding BookPublishedYear, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left">
+                <Label Content="Autor:"/>
+                <ComboBox FontSize="16"
+                          ItemsSource="{Binding AuthorsCollection}"
+                          DisplayMemberPath="FullName"
+                          Margin="5 0 0 5" 
+                          Height="30" 
+                          Width="150"
+                          SelectedItem="{Binding SelectedAuthorForBook}"
+                          IsEditable="True"
+                          IsReadOnly="True"
+                          Text="Wybierz"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left">
+                <Label Content="Ilość w magazynie:"
+                       Visibility="{Binding IsAdmin, Converter={StaticResource Bool2VisibilityConverter}}"/>
+                <TextBox FontSize="16" 
+                         Margin="5 0 0 5" 
+                         Height="30" 
+                         Width="150" 
+                         Visibility="{Binding IsAdmin, Converter={StaticResource Bool2VisibilityConverter}}"
+                         Text="{Binding BookQuantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Height="30" 
+                        Width="50" 
+                        Content="Zapisz" 
+                        Command="{Binding FinishActionCommand}"
+                        Margin="{Binding IsAdmin, Converter={StaticResource Bool2MarginConverter}}"/>
+                <Button Height="30" 
+                        Width="50" 
+                        Content="Anuluj" 
+                        Command="{Binding CloseWindowCommand}"
+                        Margin="{Binding IsAdmin, Converter={StaticResource Bool2MarginConverter}}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

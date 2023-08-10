@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="DataSource1">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=localhost;Initial Catalog=Library</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>371c75cb-935e-4d99-b17a-bf04c9d8a208</DataSourceID>
+</RptDataSource>
